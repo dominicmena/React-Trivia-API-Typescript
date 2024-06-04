@@ -1,0 +1,53 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Film",
+      "question": "Leonardo Di Caprio won his first Best Actor Oscar for his performance in which film?",
+      "correct_answer": "The Revenant",
+      "incorrect_answers": [
+        "The Wolf Of Wall Street",
+        "Shutter Island",
+        "Inception"
+      ]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Film",
+      "question": "Which former Star Trek actor directed Three Men and a Baby (1987)?",
+      "correct_answer": "Leonard Nimoy",
+      "incorrect_answers": ["William Shatner", "George Takei", "James Doohan"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Film",
+      "question": "In The Lord of the Rings: The Fellowship of the Ring, which one of the following characters from the book was left out of the film?",
+      "correct_answer": "Tom Bombadil",
+      "incorrect_answers": ["Strider", "Barliman Butterbur", "Celeborn"]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Film",
+      "question": "In Star Wars, what&#039;s the name of the new Government created after the defeat of the Galactic Empire?",
+      "correct_answer": "The New Republic",
+      "incorrect_answers": [
+        "The Rebel Alliance",
+        "The Crimson Dawn",
+        "The First Order"
+      ]
+    },
+    {
+      "type": "multiple",
+      "difficulty": "medium",
+      "category": "Entertainment: Film",
+      "question": "Which 1958 movie starred Kirk Douglas and Tony Curtis as half-brothers Einar and Eric?",
+      "correct_answer": "The Vikings ",
+      "incorrect_answers": ["The Long Ships", "Prince Valiant", "Spartacus"]
+    }
+  ]
+}
