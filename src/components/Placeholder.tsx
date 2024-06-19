@@ -9,6 +9,9 @@ import { useState } from "react";
 
 type Props = {
   questions: Question[];
+  categories: string[];
+  onSelectCategory: (category: string) => void;
+  onSelectNumberOfQuestions: (number: number) => void;
   onStartGame: () => void;
 };
 
@@ -60,9 +63,35 @@ if (!gameStarted) {
         <Card marginBottom={theme.space_md}>
 <h2>Instructions:</h2>
 <p>Welcome to the Trivia Game! Click on the button below to start the game.</p>
-<p>Select a category and number of questions before starting the game.</p>
         </Card>
       </Flex>
+      <Flex
+        justifyContent="space-around"
+        marginBottom={theme.space_huge}
+        width="90%"
+      >
+        <Card marginBottom={theme.space_md}>
+          <h3>Select a Category:</h3>
+          {props.categories.map((category, index) => (
+            <Button
+            key={index}
+            onClick={() => props.onSelectCategory(category)}>
+              {category}
+            </Button>
+          ))}
+        </Card>
+        <Card marginBottom={theme.space_md}>
+          <h3>Select Number of Questions:</h3>
+          {[5,10,15].map((number, index) => (
+            <Button
+            key={index}
+            onClick={() => props.onSelectNumberOfQuestions(number)}
+            >
+              {number}
+            </Button>
+          ))}
+        </Card>
+        </Flex>
       <Button onClick={handleStartGame}>Start Game</Button>
     </Flex>
   );

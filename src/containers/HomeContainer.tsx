@@ -11,7 +11,8 @@ export default function HomeContainer(props: Props) {
     queryKey: ["questions"],
     queryFn: () => props.apiClient.getQuestions(),
   });
-
+  
+  
   if (isLoadingQuestions) {
     return "Loading...";
   }
