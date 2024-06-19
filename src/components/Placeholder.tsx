@@ -26,6 +26,7 @@ export default function Placeholder(props: Props) {
   const [gameFinished, setGameFinished] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [correctAnswer, setCorrectAnswer] = useState<string | null>(null);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   useEffect(() => {
     setCurrentQuestionIndex(0);
@@ -33,12 +34,16 @@ export default function Placeholder(props: Props) {
     setGameFinished(false);
     setSelectedAnswer(null);
     setCorrectAnswer(null);
+    setIsCorrect(null);
   }, [props.questions]);
 
   const handleAnswer = (selectedAnswer: string, correctAnswer: string) => {
     if (selectedAnswer === correctAnswer) {
+      setIsCorrect(true);
       setScore(score + 1);
       props.logCorrectAnswer(currentQuestionIndex);
+    } else {
+      setIsCorrect(false);
     }
 
     setSelectedAnswer(selectedAnswer);
@@ -50,6 +55,7 @@ export default function Placeholder(props: Props) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
       setCorrectAnswer(null);
+      setIsCorrect(null);
     } else {
       setGameFinished(true);
     }
@@ -182,6 +188,11 @@ export default function Placeholder(props: Props) {
               {answer}
             </Button>
           ))}
+          {isCorrect !== null && (
+            <p style={{ color: isCorrect ? theme.secondary : theme.error }}>
+              {isCorrect ? "Correct!" : "Incorrect!"}
+            </p>
+          )}
           {correctAnswer && (
             <Button onClick={handleNextQuestion}>Next Question</Button>
           )}
