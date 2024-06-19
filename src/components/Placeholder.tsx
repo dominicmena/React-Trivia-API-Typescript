@@ -25,9 +25,24 @@ export default function Placeholder(props: Props) {
     props.onStartGame();
   };
 
-  
+  const handleAnswer = (selectedAnswer: string) => {
+    const currentQuestion = props.questions[currentQuestionIndex];
+    if (selectedAnswer === currentQuestion.correct_answer) {
+      setScore(score + 1);
+    }
 
-  console.log("Fetched Questions: ", props.questions);
+    if (currentQuestionIndex + 1 < props.questions.length) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      //end of game
+      setCurrentQuestionIndex(0) //reset index for new game
+      setScore(0); // reset score for new game
+      setGameStarted(false) //end game 
+    }
+  }
+
+  // console.log("Fetched Questions: ", props.questions);
+  
 
   return (
     <Flex
