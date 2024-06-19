@@ -75,7 +75,7 @@ export default function Placeholder(props: Props) {
           </Card>
           <Card marginBottom={theme.space_md}>
             <h3>Select Number of Questions:</h3>
-            {[3, 5, 10].map((number, index) => (
+            {[5, 10, 15].map((number, index) => (
               <Button key={index} onClick={() => props.onSelectNumberOfQuestions(number)}>
                 {number}
               </Button>

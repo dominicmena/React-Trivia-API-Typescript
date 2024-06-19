@@ -7,7 +7,7 @@ type Props = {
   apiClient: APIClient;
 };
 
-const AMOUNT = "5"; // Default amount
+
 const CATEGORY = "11"; // Default category
 const DIFFICULTY = "medium"; // Default difficulty
 const TYPE = "multiple"; // Default type
