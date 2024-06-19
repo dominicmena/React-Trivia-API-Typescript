@@ -1,3 +1,4 @@
+// button.tsx
 import styled from "@emotion/styled";
 
 type Props = {
@@ -5,10 +6,11 @@ type Props = {
   disabled?: boolean;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   selected?: boolean;
+  correct?: boolean;
 };
 
-const StyledButton = styled.button<{ selected: boolean }>(({ theme, selected }) => ({
-  backgroundColor: selected ? "blue" : theme.primary,
+const StyledButton = styled.button<{ selected: boolean; correct: boolean }>(({ theme, selected, correct }) => ({
+  backgroundColor: selected ? (correct ? "green" : "red") : theme.primary,
   borderRadius: theme.borderRadius_2,
   color: theme.textColor,
   padding: `${theme.space_md} ${theme.space_lg}`,
@@ -21,7 +23,7 @@ const StyledButton = styled.button<{ selected: boolean }>(({ theme, selected }) 
 
 export default function Button(props: Props) {
   return (
-    <StyledButton disabled={props.disabled} onClick={props.onClick} selected={!!props.selected}>
+    <StyledButton disabled={props.disabled} onClick={props.onClick} selected={!!props.selected} correct={!!props.correct}>
       {props.children}
     </StyledButton>
   );

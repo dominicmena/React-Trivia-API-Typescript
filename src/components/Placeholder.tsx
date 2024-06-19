@@ -1,3 +1,4 @@
+// placeholder.tsx
 import { useTheme } from "@emotion/react";
 import Flex from "../componentLibrary/Flex";
 import Card from "../componentLibrary/Card";
@@ -23,22 +24,29 @@ export default function Placeholder(props: Props) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
   useEffect(() => {
     setCurrentQuestionIndex(0);
     setScore(0);
     setGameFinished(false);
+    setSelectedAnswer(null);
   }, [props.questions]);
 
   const handleAnswer = (selectedAnswer: string) => {
     const currentQuestion = props.questions[currentQuestionIndex];
+    setSelectedAnswer(selectedAnswer);
+
     if (selectedAnswer === currentQuestion.correct_answer) {
       setScore(score + 1);
       props.logCorrectAnswer(currentQuestionIndex);
     }
+  };
 
+  const handleNextQuestion = () => {
     if (currentQuestionIndex + 1 < props.questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedAnswer(null);
     } else {
       setGameFinished(true);
     }
@@ -157,10 +165,18 @@ export default function Placeholder(props: Props) {
           ]
             .sort()
             .map((answer, index) => (
-              <Button key={index} onClick={() => handleAnswer(answer)}>
+              <Button
+                key={index}
+                onClick={() => handleAnswer(answer)}
+                selected={selectedAnswer === answer}
+                correct={selectedAnswer === props.questions[currentQuestionIndex]?.correct_answer}
+              >
                 {answer}
               </Button>
             ))}
+          {selectedAnswer && (
+            <Button onClick={handleNextQuestion}>Next Question</Button>
+          )}
         </Card>
       </Flex>
     </Flex>
