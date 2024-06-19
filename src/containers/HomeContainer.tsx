@@ -14,7 +14,7 @@ const queryClient = new QueryClient();
 
 export default function HomeContainer(props: Props) {
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] = useState<number>(5);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>('9'); // Default category ID for General Knowledge
   const [gameStarted, setGameStarted] = useState(false);
 
   const { data: categories = [], isLoading: isLoadingCategories } = useQuery({
@@ -45,7 +45,7 @@ export default function HomeContainer(props: Props) {
 
   const handleRestartGame = () => {
     setGameStarted(false);
-    setSelectedCategory(null);
+    setSelectedCategory('9'); // Reset to default category ID
     setSelectedNumberOfQuestions(5);
   };
 
