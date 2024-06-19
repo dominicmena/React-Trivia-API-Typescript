@@ -22,10 +22,12 @@ export default function Placeholder(props: Props) {
   const theme = useTheme();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [gameFinished, setGameFinished] = useState(false);
 
   useEffect(() => {
     setCurrentQuestionIndex(0);
     setScore(0);
+    setGameFinished(false);
   }, [props.questions]);
 
   const handleAnswer = (selectedAnswer: string) => {
@@ -38,7 +40,7 @@ export default function Placeholder(props: Props) {
     if (currentQuestionIndex + 1 < props.questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      props.onRestartGame();
+      setGameFinished(true);
     }
   };
 
@@ -113,6 +115,26 @@ export default function Placeholder(props: Props) {
           </Card>
         </Flex>
         <Button onClick={props.onStartGame}>Start Game</Button>
+      </Flex>
+    );
+  }
+
+  if (gameFinished) {
+    return (
+      <Flex
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        height="100%"
+        width="100%"
+      >
+        <Card marginBottom={theme.space_md}>
+          <h2>Game Over</h2>
+          <p>
+            Your final score is {score} out of {props.questions.length}.
+          </p>
+          <Button onClick={props.onRestartGame}>Play Again</Button>
+        </Card>
       </Flex>
     );
   }
