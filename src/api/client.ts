@@ -1,10 +1,10 @@
-import { Question } from "../types";
+import { Question } from "../types/index";
 import unreliableAxios from "./unreliableAxios";
 
-// const AMOUNT = "5";
-// const CATEGORY = "11";
-// const DIFFICULTY = "medium";
-// const TYPE = "multiple";
+const AMOUNT = "5";
+const CATEGORY = "11";
+const DIFFICULTY = "medium";
+const TYPE = "multiple";
 
 export default class APIClient {
   baseURL: string;
@@ -14,15 +14,10 @@ export default class APIClient {
     this.baseURL = params.baseURL;
   }
 
-  public async getQuestions(params: {
-    amount: string;
-    category: string;
-    difficulty: string;
-    type: string; 
-  }) {
-    const { amount, category, difficulty, type} = params;
+  public async getQuestions() {
     const res = (await unreliableAxios.get(
-      `${this.baseURL}/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`
+      this.baseURL +
+        `/api.php?amount=${AMOUNT}&category=${CATEGORY}&difficulty=${DIFFICULTY}&type=${TYPE}`
     )) as unknown as { data: { results: Question[] } };
 
     return res.data.results;

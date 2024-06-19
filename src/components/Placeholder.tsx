@@ -3,6 +3,7 @@ import Flex from "../componentLibrary/Flex";
 import Card from "../componentLibrary/Card";
 import Button from "../componentLibrary/Button";
 import { Question } from "../types";
+import { useState } from "react";
 
 // const PLACEHOLDERS = ["Placeholder A", "Placeholder B", "Placeholder C"];
 
@@ -13,13 +14,16 @@ type Props = {
 
 export default function Placeholder(props: Props) {
   const theme = useTheme();
-  const [currentQuestion]
-
-  console.log("Fetched Questions: ", props.questions);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [gameStarted, setGameStarted] = useState(false);
 
   const handleStartGame = () => {
-    props.onStartGame()
+    setCurrentQuestionIndex(0) //reset index for new game
   }
+  
+
+  console.log("Fetched Questions: ", props.questions);
 
   return (
     <Flex
@@ -34,22 +38,11 @@ export default function Placeholder(props: Props) {
         marginBottom={theme.space_huge}
         width="90%"
       >
-        <Card marginBottom={theme.space_md}>
-          <h2>Instructions:</h2>
-          <p>
-            Welcome to the Trivia Game! Click the button below to start a new
-            game.
-          </p>
-          <p>Select a category and number of questions before starting the game.</p>
-        </Card>
-        <Select label="Select Category" options={categories}/>
-        <Select label="Number of Questions" options={numbers}/>
+        {PLACEHOLDERS.map((text) => {
+          return <Card key={text}>{text}</Card>;
+        })}
       </Flex>
-      <Button onClick={handleStartGame}>Start Game</Button>
+      <Button onClick={props.onStartGame}>Example Button</Button>
     </Flex>
   );
 }
-
-// {PLACEHOLDERS.map((text) => {
-//   return <Card key={text}>{text}</Card>;
-// })}
