@@ -11,6 +11,7 @@ type Props = {
   onSelectCategory: (category: string) => void;
   onSelectNumberOfQuestions: (number: number) => void;
   onStartGame: () => void;
+  onRestartGame: () => void;
   logCorrectAnswer: (questionIndex: number) => void;
   selectedNumberOfQuestions: number;
   selectedCategory: string | null;
@@ -37,8 +38,7 @@ export default function Placeholder(props: Props) {
     if (currentQuestionIndex + 1 < props.questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      setCurrentQuestionIndex(0);
-      setScore(0);
+      props.onRestartGame();
     }
   };
 

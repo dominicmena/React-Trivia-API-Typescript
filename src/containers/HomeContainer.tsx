@@ -43,6 +43,12 @@ export default function HomeContainer(props: Props) {
     refetchQuestions();
   };
 
+  const handleRestartGame = () => {
+    setGameStarted(false);
+    setSelectedCategory(null);
+    setSelectedNumberOfQuestions(5);
+  };
+
   const handleSelectCategory = (category: string) => {
     setSelectedCategory(category);
   };
@@ -68,6 +74,7 @@ export default function HomeContainer(props: Props) {
         onSelectCategory={handleSelectCategory}
         onSelectNumberOfQuestions={handleSelectNumberOfQuestions}
         onStartGame={handleStartGame}
+        onRestartGame={handleRestartGame}
         logCorrectAnswer={logCorrectAnswer}
         selectedNumberOfQuestions={selectedNumberOfQuestions}
         selectedCategory={selectedCategory}
