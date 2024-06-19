@@ -7,40 +7,48 @@ type Props = {
   apiClient: APIClient;
 };
 
-export default function HomeContainer(props: Props) {
-  const { data: questions = [], isLoading: isLoadingQuestions } = useQuery({
-    queryKey: ["questions"],
-    queryFn: () => props.apiClient.getQuestions(),
-  });
+const AMOUNT = "5"; // Default amount
+const CATEGORY = "11"; // Default category
+const DIFFICULTY = "medium"; // Default difficulty
+const TYPE = "multiple"; // Default type
 
+export default function HomeContainer(props: Props) {
+  const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] = useState<number>(5);
   const { data: categories = [], isLoading: isLoadingCategories } = useQuery({
     queryKey: ["categories"],
     queryFn: () => props.apiClient.getCategories(),
   });
 
+  const { data: questions = [], isLoading: isLoadingQuestions, refetch: refetchQuestions } = useQuery({
+    queryKey: ["questions", selectedNumberOfQuestions], // Include selectedNumberOfQuestions in query key
+    queryFn: () => props.apiClient.getQuestions(String(selectedNumberOfQuestions), CATEGORY, DIFFICULTY, TYPE),
+  });
+
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] = useState<number>(5);
 
   function handleStartGame() {
     console.log("Start Game");
-    // Further logic for starting the game can be added here
   }
 
   function handleSelectCategory(category: string) {
     console.log("Selected category:", category);
     setSelectedCategory(category);
-    // Logic to filter questions based on selected category can be implemented here
   }
 
   function handleSelectNumberOfQuestions(number: number) {
     console.log("Selected number of questions:", number);
     setSelectedNumberOfQuestions(number);
-    // Logic to limit the number of questions displayed can be implemented here
+    refetchQuestions(); // Trigger refetch when number of questions changes
   }
 
   if (isLoadingQuestions || isLoadingCategories) {
     return "Loading...";
   }
+
+  const logCorrectAnswer = (questionIndex: number) => {
+    const currentQuestion = questions[questionIndex];
+    console.log("Correct answer:", currentQuestion.correct_answer);
+  };
 
   return (
     <Placeholder
@@ -49,6 +57,7 @@ export default function HomeContainer(props: Props) {
       onSelectCategory={handleSelectCategory}
       onSelectNumberOfQuestions={handleSelectNumberOfQuestions}
       onStartGame={handleStartGame}
+      logCorrectAnswer={logCorrectAnswer} 
     />
   );
 }

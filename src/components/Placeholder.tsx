@@ -3,7 +3,7 @@ import Flex from "../componentLibrary/Flex";
 import Card from "../componentLibrary/Card";
 import Button from "../componentLibrary/Button";
 import { Question } from "../types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type Props = {
   questions: Question[];
@@ -11,6 +11,7 @@ type Props = {
   onSelectCategory: (category: string) => void;
   onSelectNumberOfQuestions: (number: number) => void;
   onStartGame: () => void;
+  logCorrectAnswer: (questionIndex: number) => void;
 };
 
 export default function Placeholder(props: Props) {
@@ -19,21 +20,27 @@ export default function Placeholder(props: Props) {
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
 
+  useEffect(() => {
+    // Reset game state when questions change
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setGameStarted(false);
+  }, [props.questions]); // Reset game state when questions change
+
   const handleStartGame = () => {
-    setCurrentQuestionIndex(0); // Reset index for new game
-    setScore(0); // Reset score for new game
-    setGameStarted(true);
     props.onStartGame();
+    setGameStarted(true);
   };
 
   const handleAnswer = (selectedAnswer: string) => {
     const currentQuestion = props.questions[currentQuestionIndex];
     if (selectedAnswer === currentQuestion.correct_answer) {
-      setScore(score + 1);
+      props.logCorrectAnswer(currentQuestionIndex); // Log correct answer
+      setScore(score + 1); // Increment score
     }
 
     if (currentQuestionIndex + 1 < props.questions.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentQuestionIndex(currentQuestionIndex + 1); // Move to the next question
     } else {
       // End of game
       setCurrentQuestionIndex(0); // Reset index for new game
