@@ -4,7 +4,7 @@ import Card from "../componentLibrary/Card";
 import Button from "../componentLibrary/Button";
 import { Question } from "../types";
 
-const PLACEHOLDERS = ["Placeholder A", "Placeholder B", "Placeholder C"];
+// const PLACEHOLDERS = ["Placeholder A", "Placeholder B", "Placeholder C"];
 
 type Props = {
   questions: Question[];
@@ -13,8 +13,13 @@ type Props = {
 
 export default function Placeholder(props: Props) {
   const theme = useTheme();
+  const [currentQuestion]
 
   console.log("Fetched Questions: ", props.questions);
+
+  const handleStartGame = () => {
+    props.onStartGame()
+  }
 
   return (
     <Flex
@@ -37,8 +42,10 @@ export default function Placeholder(props: Props) {
           </p>
           <p>Select a category and number of questions before starting the game.</p>
         </Card>
+        <Select label="Select Category" options={categories}/>
+        <Select label="Number of Questions" options={numbers}/>
       </Flex>
-      <Button onClick={props.onStartGame}>Example Button</Button>
+      <Button onClick={handleStartGame}>Start Game</Button>
     </Flex>
   );
 }
