@@ -85,12 +85,7 @@ export default function Placeholder(props: Props) {
               <Button
                 key={category.id}
                 onClick={() => handleCategorySelect(category.id.toString())}
-                style={{
-                  backgroundColor:
-                    props.selectedCategory === category.id.toString()
-                      ? "blue"
-                      : "initial",
-                }}
+                selected={props.selectedCategory === category.id.toString()}
               >
                 {category.name}
               </Button>
@@ -102,12 +97,7 @@ export default function Placeholder(props: Props) {
               <Button
                 key={number}
                 onClick={() => handleNumberOfQuestionsSelect(number)}
-                style={{
-                  backgroundColor:
-                    props.selectedNumberOfQuestions === number
-                      ? "blue"
-                      : "initial",
-                }}
+                selected={props.selectedNumberOfQuestions === number}
               >
                 {number}
               </Button>
