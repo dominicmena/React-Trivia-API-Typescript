@@ -1,3 +1,4 @@
+// Placeholder.tsx
 import { useTheme } from "@emotion/react";
 import Flex from "../componentLibrary/Flex";
 import Card from "../componentLibrary/Card";
@@ -7,11 +8,13 @@ import { useState, useEffect } from "react";
 
 type Props = {
   questions: Question[];
-  categories: string[];
+  categories: { id: number, name: string }[];
   onSelectCategory: (category: string) => void;
   onSelectNumberOfQuestions: (number: number) => void;
   onStartGame: () => void;
   logCorrectAnswer: (questionIndex: number) => void;
+  selectedNumberOfQuestions: number;
+  selectedCategory: string | null;
 };
 
 export default function Placeholder(props: Props) {
@@ -19,13 +22,15 @@ export default function Placeholder(props: Props) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(props.selectedCategory);
+  const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] = useState<number>(props.selectedNumberOfQuestions);
 
   useEffect(() => {
     // Reset game state when starting new game
     setCurrentQuestionIndex(0);
     setScore(0);
     setGameStarted(false);
-  }, [props.questions]); // Reset game state when questions change
+  }, [props.questions]);
 
   const handleStartGame = () => {
     props.onStartGame();
@@ -49,6 +54,16 @@ export default function Placeholder(props: Props) {
     }
   };
 
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category);
+    props.onSelectCategory(category);
+  };
+
+  const handleNumberOfQuestionsSelect = (number: number) => {
+    setSelectedNumberOfQuestions(number);
+    props.onSelectNumberOfQuestions(number);
+  };
+
   if (!gameStarted) {
     return (
       <Flex
@@ -67,16 +82,24 @@ export default function Placeholder(props: Props) {
         <Flex justifyContent="space-around" marginBottom={theme.space_huge} width="90%">
           <Card marginBottom={theme.space_md}>
             <h3>Select a Category:</h3>
-            {props.categories.map((category, index) => (
-              <Button key={index} onClick={() => props.onSelectCategory(category)}>
-                {category}
+            {props.categories.slice(0, 3).map((category, index) => (
+              <Button 
+                key={index} 
+                onClick={() => handleCategorySelect(category.id.toString())}
+                style={{ backgroundColor: selectedCategory === category.id.toString() ? 'blue' : 'initial' }}
+              >
+                {category.name}
               </Button>
             ))}
           </Card>
           <Card marginBottom={theme.space_md}>
             <h3>Select Number of Questions:</h3>
             {[5, 10, 15].map((number, index) => (
-              <Button key={index} onClick={() => props.onSelectNumberOfQuestions(number)}>
+              <Button 
+                key={index} 
+                onClick={() => handleNumberOfQuestionsSelect(number)}
+                style={{ backgroundColor: selectedNumberOfQuestions === number ? 'blue' : 'initial' }}
+              >
                 {number}
               </Button>
             ))}
@@ -104,7 +127,7 @@ export default function Placeholder(props: Props) {
               {answer}
             </Button>
           ))}
-          <Button onClick={handleStartGame}>
+          <Button onClick={handleAnswer}>
             {currentQuestionIndex + 1 < props.questions.length ? "Next Question" : "New Game"}
           </Button>
         </Card>

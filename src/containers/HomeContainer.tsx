@@ -1,3 +1,4 @@
+// HomeContainer.tsx
 import APIClient from "../api/client";
 import Placeholder from "../components/Placeholder";
 import { useQuery } from "react-query";
@@ -7,28 +8,27 @@ type Props = {
   apiClient: APIClient;
 };
 
-
-const CATEGORY = "11"; // Default category
 const DIFFICULTY = "medium"; // Default difficulty
 const TYPE = "multiple"; // Default type
 
 export default function HomeContainer(props: Props) {
   const [selectedNumberOfQuestions, setSelectedNumberOfQuestions] = useState<number>(5);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
   const { data: categories = [], isLoading: isLoadingCategories } = useQuery({
     queryKey: ["categories"],
     queryFn: () => props.apiClient.getCategories(),
   });
 
   const { data: questions = [], isLoading: isLoadingQuestions, refetch: refetchQuestions } = useQuery({
-    queryKey: ["questions", selectedNumberOfQuestions], // Include selectedNumberOfQuestions in query key
-    queryFn: () => props.apiClient.getQuestions(String(selectedNumberOfQuestions), CATEGORY, DIFFICULTY, TYPE),
+    queryKey: ["questions", selectedNumberOfQuestions, selectedCategory], 
+    queryFn: () => props.apiClient.getQuestions(String(selectedNumberOfQuestions), selectedCategory ?? "11", DIFFICULTY, TYPE),
+    enabled: false, // Initially disabled
   });
-
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   function handleStartGame() {
     console.log("Start Game");
-    refetchQuestions(); 
+    refetchQuestions();
   }
 
   function handleSelectCategory(category: string) {
@@ -58,6 +58,8 @@ export default function HomeContainer(props: Props) {
       onSelectNumberOfQuestions={handleSelectNumberOfQuestions}
       onStartGame={handleStartGame}
       logCorrectAnswer={logCorrectAnswer} 
+      selectedNumberOfQuestions={selectedNumberOfQuestions}
+      selectedCategory={selectedCategory}
     />
   );
 }
