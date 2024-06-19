@@ -19,8 +19,12 @@ export default function Placeholder(props: Props) {
   const [gameStarted, setGameStarted] = useState(false);
 
   const handleStartGame = () => {
-    setCurrentQuestionIndex(0) //reset index for new game
-  }
+    setCurrentQuestionIndex(0); //reset index for new game
+    setScore(0); //reset score for new game
+    setGameStarted(true);
+    props.onStartGame();
+  };
+
   
 
   console.log("Fetched Questions: ", props.questions);
