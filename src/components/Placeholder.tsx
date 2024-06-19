@@ -42,8 +42,8 @@ export default function Placeholder(props: Props) {
   }
 
   // console.log("Fetched Questions: ", props.questions);
-  
 
+if (!gameStarted) {
   return (
     <Flex
       direction="column"
@@ -57,11 +57,16 @@ export default function Placeholder(props: Props) {
         marginBottom={theme.space_huge}
         width="90%"
       >
-        {PLACEHOLDERS.map((text) => {
-          return <Card key={text}>{text}</Card>;
-        })}
+        <Card marginBottom={theme.space_md}>
+<h2>Instructions:</h2>
+        </Card>
       </Flex>
       <Button onClick={props.onStartGame}>Example Button</Button>
     </Flex>
   );
 }
+}
+
+// {PLACEHOLDERS.map((text) => {
+//   return <Card key={text}>{text}</Card>;
+// })}
