@@ -21,7 +21,7 @@ export default function Placeholder(props: Props) {
   const [gameStarted, setGameStarted] = useState(false);
 
   useEffect(() => {
-    // Reset game state when questions change
+    // Reset game state when starting new game
     setCurrentQuestionIndex(0);
     setScore(0);
     setGameStarted(false);
@@ -35,17 +35,17 @@ export default function Placeholder(props: Props) {
   const handleAnswer = (selectedAnswer: string) => {
     const currentQuestion = props.questions[currentQuestionIndex];
     if (selectedAnswer === currentQuestion.correct_answer) {
-      props.logCorrectAnswer(currentQuestionIndex); // Log correct answer
-      setScore(score + 1); // Increment score
+      setScore(score + 1);
+      props.logCorrectAnswer(currentQuestionIndex);
     }
 
     if (currentQuestionIndex + 1 < props.questions.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1); // Move to the next question
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
       // End of game
-      setCurrentQuestionIndex(0); // Reset index for new game
-      setScore(0); // Reset score for new game
-      setGameStarted(false); // End game
+      setCurrentQuestionIndex(0);
+      setScore(0);
+      setGameStarted(false);
     }
   };
 
@@ -75,7 +75,7 @@ export default function Placeholder(props: Props) {
           </Card>
           <Card marginBottom={theme.space_md}>
             <h3>Select Number of Questions:</h3>
-            {[5, 10, 15].map((number, index) => (
+            {[3, 5, 10].map((number, index) => (
               <Button key={index} onClick={() => props.onSelectNumberOfQuestions(number)}>
                 {number}
               </Button>

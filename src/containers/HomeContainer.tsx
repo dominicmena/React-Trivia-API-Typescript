@@ -38,7 +38,7 @@ export default function HomeContainer(props: Props) {
   function handleSelectNumberOfQuestions(number: number) {
     console.log("Selected number of questions:", number);
     setSelectedNumberOfQuestions(number);
-    refetchQuestions(); // Trigger refetch when number of questions changes
+    refetchQuestions(); 
   }
 
   if (isLoadingQuestions || isLoadingCategories) {
