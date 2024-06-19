@@ -28,6 +28,7 @@ export default function HomeContainer(props: Props) {
 
   function handleStartGame() {
     console.log("Start Game");
+    refetchQuestions(); 
   }
 
   function handleSelectCategory(category: string) {
@@ -38,7 +39,6 @@ export default function HomeContainer(props: Props) {
   function handleSelectNumberOfQuestions(number: number) {
     console.log("Selected number of questions:", number);
     setSelectedNumberOfQuestions(number);
-    refetchQuestions(); 
   }
 
   if (isLoadingQuestions || isLoadingCategories) {
