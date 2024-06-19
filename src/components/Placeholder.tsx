@@ -25,19 +25,23 @@ export default function Placeholder(props: Props) {
   const [score, setScore] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [answerClicked, setAnswerClicked] = useState(false); // Track if an answer has been clicked
 
   useEffect(() => {
     setCurrentQuestionIndex(0);
     setScore(0);
     setGameFinished(false);
     setSelectedAnswer(null);
+    setAnswerClicked(false); // Reset answer clicked state
   }, [props.questions]);
 
-  const handleAnswer = (selectedAnswer: string) => {
-    const currentQuestion = props.questions[currentQuestionIndex];
-    setSelectedAnswer(selectedAnswer);
+  const handleAnswer = (selectedAnswer: string, correctAnswer: string) => {
+    if (answerClicked) return; // Prevent selecting another answer if one is already clicked
 
-    if (selectedAnswer === currentQuestion.correct_answer) {
+    setSelectedAnswer(selectedAnswer);
+    setAnswerClicked(true); // Set answer clicked to true
+
+    if (selectedAnswer === correctAnswer) {
       setScore(score + 1);
       props.logCorrectAnswer(currentQuestionIndex);
     }
@@ -47,6 +51,7 @@ export default function Placeholder(props: Props) {
     if (currentQuestionIndex + 1 < props.questions.length) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
+      setAnswerClicked(false); // Reset answer clicked state for next question
     } else {
       setGameFinished(true);
     }
@@ -94,6 +99,7 @@ export default function Placeholder(props: Props) {
                 key={category.id}
                 onClick={() => handleCategorySelect(category.id.toString())}
                 selected={props.selectedCategory === category.id.toString()}
+                correct={false}
               >
                 {category.name}
               </Button>
@@ -106,6 +112,7 @@ export default function Placeholder(props: Props) {
                 key={number}
                 onClick={() => handleNumberOfQuestionsSelect(number)}
                 selected={props.selectedNumberOfQuestions === number}
+                correct={false}
               >
                 {number}
               </Button>
@@ -137,6 +144,8 @@ export default function Placeholder(props: Props) {
     );
   }
 
+  const currentQuestion = props.questions[currentQuestionIndex];
+
   return (
     <Flex
       direction="column"
@@ -158,18 +167,18 @@ export default function Placeholder(props: Props) {
           <p>Score: {score}</p>
         </Card>
         <Card marginBottom={theme.space_md}>
-          <h3>{props.questions[currentQuestionIndex]?.question}</h3>
+          <h3>{currentQuestion?.question}</h3>
           {[
-            ...props.questions[currentQuestionIndex]?.incorrect_answers,
-            props.questions[currentQuestionIndex]?.correct_answer,
+            ...currentQuestion?.incorrect_answers,
+            currentQuestion?.correct_answer,
           ]
             .sort()
             .map((answer, index) => (
               <Button
                 key={index}
-                onClick={() => handleAnswer(answer)}
+                onClick={() => handleAnswer(answer, currentQuestion?.correct_answer || "")}
                 selected={selectedAnswer === answer}
-                correct={selectedAnswer === props.questions[currentQuestionIndex]?.correct_answer}
+                correct={selectedAnswer === currentQuestion?.correct_answer}
               >
                 {answer}
               </Button>
