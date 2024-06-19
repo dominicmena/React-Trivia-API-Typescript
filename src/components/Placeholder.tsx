@@ -67,6 +67,45 @@ if (!gameStarted) {
     </Flex>
   );
 }
+
+return (
+  <Flex
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      height="100%"
+      width="100%"
+    >
+      <Flex
+        justifyContent="space-around"
+        marginBottom={theme.space_huge}
+        width="90%"
+      >
+<Card marginBottom={theme.space_md}>
+  <h2>Trivia Game</h2>
+  <p>
+    Question {currentQuestionIndex + 1} of {props.questions.length}
+  </p>
+  <p>Score: {score}</p>
+</Card>
+<Card marginBottom={theme.space_md}>
+  <h3>{props.questions[currentQuestionIndex]?.question}</h3>
+  {props.questions[currentQuestionIndex]?.incorrect_answers.map(
+    (answer, index) => (
+      <Button key={index} onClick={() => handleAnswer(answer)}>
+        {answer}
+      </Button>
+    )
+  )}
+  <Button onClick={handleStartGame}>
+    {currentQuestionIndex + 1 < props.questions.length 
+    ? "Next Question"
+    : "New Game"}
+  </Button>
+</Card>
+      </Flex>
+      </Flex>
+)
 }
 
 // {PLACEHOLDERS.map((text) => {
