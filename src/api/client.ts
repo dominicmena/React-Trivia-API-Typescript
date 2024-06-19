@@ -1,4 +1,3 @@
-// client.ts
 import { Question } from "../types/index";
 import unreliableAxios from "./unreliableAxios";
 
@@ -16,9 +15,13 @@ export default class APIClient {
   }
 
   public async getQuestions(amount: string, category: string, difficulty: string, type: string) {
-    const res = await unreliableAxios.get(
-      `${this.baseURL}/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`
-    );
-    return res.data.results as Question[];
+    try {
+      const res = await unreliableAxios.get(
+        `${this.baseURL}/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`
+      );
+      return res.data.results as Question[];
+    } catch (error) {
+      throw new Error("Failed to fetch questions"); // Handle error or retry logic here if needed
+    }
   }
 }

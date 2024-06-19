@@ -1,23 +1,29 @@
-import axios from "axios";
+import axios from 'axios';
 
-/*
+const MAX_RETRIES = 1;
+const INITIAL_BACKOFF = 10000; // Initial backoff in milliseconds (1 second)
 
-NOTE:
+const unreliableAxios = axios.create();
 
-This exists to create some transient errors. Please handle the errors.
+unreliableAxios.interceptors.response.use(
+  response => response,
+  async error => {
+    const { config, response } = error;
+    const status = response ? response.status : 0;
+    const retries = config.__retries || 0;
 
-*/
+    if (status === 429 && retries < MAX_RETRIES) {
+      const backoff = INITIAL_BACKOFF * Math.pow(2, retries);
+      console.warn(`Rate limit exceeded. Retrying in ${backoff}ms...`);
 
-class UnreliableAxios {
-  public async get(path: string) {
-    const res = await axios.get(path);
+      config.__retries = retries + 1;
+      await new Promise(resolve => setTimeout(resolve, backoff));
 
-    if (Math.random() < 0.2) {
-      throw new Error("UNKNOWN_ERROR");
+      return unreliableAxios(config);
     }
 
-    return res;
+    return Promise.reject(error);
   }
-}
+);
 
-export default new UnreliableAxios();
+export default unreliableAxios;
