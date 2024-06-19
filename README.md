@@ -4,7 +4,7 @@ This repository holds the boilerplate for a Trivia Quiz Game application.
 
 Your goal is to write React code that delivers the product described in the ticket below. You should write code that you would feel comfortable submitting for code review and deploying to production.
 
-**Please spend no more than two hours on this project.**
+**Please spend no more than two hours on this project.*
 
 ## Ticket LC-5678
 
