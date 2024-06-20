@@ -12,19 +12,19 @@ export const palette = {
   },
 
   green: {
-    20: "#F4FBC0",
-    40: "#EAF978",
-    60: "#99A637",
-    80: "#4A510F",
-    100: "#2E3400",
+    20: "#D0E6A5", // Light green
+    40: "#7BC96F", // Medium green
+    60: "#4CAF50", // Dark green
+    80: "#388E3C", // Darker green
+    100: "#1B5E20", // Darkest green
   },
 
   red: {
-    20: "#E9B2C7",
-    40: "#DD6B97",
-    60: "#933157",
-    80: "#480D24",
-    100: "#2E0012",
+    20: "#EF9A9A", // Light red
+    40: "#E57373", // Medium red
+    60: "#F44336", // Dark red
+    80: "#D32F2F", // Darker red
+    100: "#B71C1C", // Darkest red
   },
 
   purple: {
@@ -35,5 +35,7 @@ export const palette = {
     100: "#0F0224",
   },
 
-  yellow: { 40: "#ddc16b" },
+  yellow: {
+    40: "#ddc16b",
+  },
 };
