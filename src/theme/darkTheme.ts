@@ -28,7 +28,7 @@ export const sizes = {
 };
 
 export const fontStyles = {
-  fontFamily: "Helvetica",
+  fontFamily: "'Roboto', sans-serif",
   fontSize_base: "16px",
   fontSize_small: "0.7rem",
   fontSize_ui: "0.875rem",

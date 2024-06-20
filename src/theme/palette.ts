@@ -1,41 +1,81 @@
-export const palette = {
-  white: "#FFFFFF",
-  black: "#000000",
+import { palette } from "./palette";
 
-  grey: {
-    10: "#c0c2cf",
-    20: "#858794",
-    40: "#5f6275",
-    60: "#464952",
-    80: "#2b2d30",
-    100: "#141417",
-  },
-
-  green: {
-    20: "#D0E6A5", // Light green
-    40: "#7BC96F", // Medium green
-    60: "#4CAF50", // Dark green
-    80: "#388E3C", // Darker green
-    100: "#1B5E20", // Darkest green
-  },
-
-  red: {
-    20: "#EF9A9A", // Light red
-    40: "#E57373", // Medium red
-    60: "#F44336", // Dark red
-    80: "#D32F2F", // Darker red
-    100: "#B71C1C", // Darkest red
-  },
-
-  purple: {
-    20: "#B0A0CC",
-    40: "#7B5DAF",
-    60: "#482E74",
-    80: "#1E0F39",
-    100: "#0F0224",
-  },
-
-  yellow: {
-    40: "#ddc16b",
-  },
+export const sizes = {
+  borderRadius_1: "0.25rem",
+  borderRadius_2: "0.5rem",
+  borderRadius_3: "0.75rem",
+  borderRadius_4: "1rem",
+  fontSize_ui: "0.9rem",
+  lineHeight_ui: 1.5,
+  lineHeight: 1.25,
+  size_jumbo: "4rem",
+  size_large: "3rem",
+  size_medium: "2.5rem",
+  size_small: "2rem",
+  size_tiny: "1.5rem",
+  space_huge: "4rem",
+  space_lg: "1.75rem",
+  space_md: "1rem",
+  space_sm: "0.75rem",
+  space_xl: "2rem",
+  space_xs: "0.5rem",
+  space_xxs: "0.25rem",
+  zIndex_100: 100,
+  zIndex_1600: 1600,
+  zIndex_200: 200,
+  zIndex_400: 400,
+  zIndex_800: 800,
 };
+
+export const fontStyles = {
+  fontFamily: "'Montserrat', sans-serif", // Default font
+  fontSize_base: "16px",
+  fontSize_small: "0.7rem",
+  fontSize_ui: "0.875rem",
+  fontSize_xs: "0.55rem",
+  fontWeight_bold: 700,
+  fontWeight_regular: 400,
+  fontWeight_semiBold: 600,
+  fontWeight_thin: 100,
+  h1_fontSize: "2.125rem",
+  h1_fontWeight: 700,
+  h2_fontSize: "2rem",
+  h2_fontWeight: 600,
+  h3_fontSize: "1.5rem",
+  h3_fontWeight: 600,
+  h4_fontSize: "1.25rem",
+  h4_fontWeight: 600,
+  h5_fontSize: "0.875rem",
+  h5_fontWeight: 400,
+  h6_fontSize: "0.75rem",
+  h6_fontWeight: 400,
+};
+
+const colors = {
+  backgroundColor: palette.grey[80],
+  diabledBackgroundColor: palette.grey[20],
+  cardBackground: palette.grey[80],
+  error: palette.red[40],
+  errorLight: palette.red[20],
+  navBackground: palette.grey[60],
+  linkColor: palette.purple[60],
+  linkColorHover: palette.purple[40],
+  primary: palette.grey[100],
+  primaryLight: palette.grey[80],
+  secondary: palette.green[60],
+  secondaryLight: palette.green[40],
+  shadowDark: "9px 9px 18px #141517",
+  shadowLight: "-9px -9px 18px #424549",
+  textColor: palette.grey[10],
+  textInverted: palette.white,
+  warn: palette.red[60],
+  warnLight: palette.red[40],
+};
+
+export const darkTheme = {
+  ...sizes,
+  ...fontStyles,
+  ...colors,
+};
+
+export type Theme = typeof darkTheme;
