@@ -52,10 +52,10 @@ export const fontStyles = {
 };
 
 const colors = {
-  backgroundColor: palette.grey[80],
+  backgroundColor: palette.grey[60],
   diabledBackgroundColor: palette.grey[20],
   cardBackground: palette.grey[80],
-  error: palette.red[40],
+  error: palette.red[60],
   errorLight: palette.red[20],
   navBackground: palette.grey[60],
   linkColor: palette.purple[60],
@@ -67,9 +67,9 @@ const colors = {
   shadowDark: "7px 7px 10px #141517",
   shadowLight: "-9px -9px 18px #424549",
   textColor: palette.grey[10],
-  textInverted: palette.white,
+  textInverted: palette.purple[60],
   warn: palette.red[60],
-  warnLight: palette.red[40],
+  warnLight: palette.red[80],
 };
 
 export const darkTheme = {
