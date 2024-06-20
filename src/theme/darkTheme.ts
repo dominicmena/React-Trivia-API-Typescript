@@ -64,7 +64,7 @@ const colors = {
   primaryLight: palette.grey[80],
   secondary: palette.green[60],
   secondaryLight: palette.green[40],
-  shadowDark: "9px 9px 18px #141517",
+  shadowDark: "7px 7px 10px #141517",
   shadowLight: "-9px -9px 18px #424549",
   textColor: palette.grey[10],
   textInverted: palette.white,
