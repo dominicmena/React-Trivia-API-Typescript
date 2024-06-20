@@ -15,7 +15,7 @@ A user should be able to:
 - Select:
   - a category of questions
   - number of questions
-  
+
 ## Running the App
 
 `npm install`
@@ -43,7 +43,7 @@ Features:
 - Response Handling: Axios interceptor manages response errors, particularly handling 429 Too Many Requests with automatic retries using exponential backoff (MAX_RETRIES, INITIAL_BACKOFF constants).
 Error Handling:
 
-- Retry Logic: Automatically retries requests upon encountering rate limits (429 errors), enhancing application resilience during network fluctuations.
+- Retry Logic: Automatically retries requests upon encountering rate limits (429 errors), enhancing application resilience during network fluctuations. 
 Button Component (button.tsx)
 Features:
 
