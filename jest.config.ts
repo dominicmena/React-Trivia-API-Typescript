@@ -1,13 +1,17 @@
-export default {
-  testEnvironment: "jsdom",
-  transform: {
-    "^.+\\.tsx?$": "ts-jest",
-  },
 
+import type { Config } from '@jest/types';
+
+const config: Config.InitialOptions = {
+  preset: 'ts-jest',
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   moduleNameMapper: {
-    "\\.(css|less|sass|scss)$": "identity-obj-proxy",
-    "^.+\\.svg$": "jest-transformer-svg",
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
-
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
+  },
 };
+
+export default config;
