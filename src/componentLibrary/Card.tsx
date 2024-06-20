@@ -1,4 +1,3 @@
-// card.tsx
 import Box, { Props as BoxProps } from "./Box";
 import styled from "@emotion/styled";
 

@@ -1,4 +1,3 @@
-// Placeholder component where cards with buttons are used
 import { useTheme } from "@emotion/react";
 import Flex from "../componentLibrary/Flex";
 import Card from "../componentLibrary/Card";
@@ -89,7 +88,7 @@ export default function Placeholder(props: Props) {
           marginBottom={theme.space_huge}
           width="90%"
         >
-          <Card marginBottom={theme.space_md}>
+          <Card marginBottom={theme.space_lg}> {/* Increased marginBottom */}
             <h2>Instructions:</h2>
             <p>
               Welcome to the Trivia Game! Click on the button below to start the
@@ -102,35 +101,41 @@ export default function Placeholder(props: Props) {
           marginBottom={theme.space_huge}
           width="90%"
         >
-          <Card marginBottom={theme.space_md}>
+          {/* Category selection */}
+          <Card style={{ padding: theme.space_md, marginBottom: theme.space_lg }}> {/* Increased marginBottom */}
             <h3>Select a Category:</h3>
-            {props.categories.slice(0, 3).map((category) => (
-              <Button
-                key={category.id}
-                onClick={() => handleCategorySelect(category.id.toString())}
-                selected={props.selectedCategory === category.id.toString()}
-                correct={false}
-                answered={false}
-                style={{ marginRight: theme.space_sm }} // Adjust spacing between buttons
-              >
-                {category.name}
-              </Button>
-            ))}
+            <Flex justifyContent="center" marginBottom={theme.space_sm}>
+              {props.categories.slice(0, 3).map((category) => (
+                <Button
+                  key={category.id}
+                  onClick={() => handleCategorySelect(category.id.toString())}
+                  selected={props.selectedCategory === category.id.toString()}
+                  correct={false}
+                  answered={false}
+                  style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }} // Adjusted marginRight and added marginBottom
+                >
+                  {category.name}
+                </Button>
+              ))}
+            </Flex>
           </Card>
-          <Card marginBottom={theme.space_md}>
+          {/* Number of questions selection */}
+          <Card style={{ padding: theme.space_md }}>
             <h3>Select Number of Questions:</h3>
-            {[5, 10, 15].map((number) => (
-              <Button
-                key={number}
-                onClick={() => handleNumberOfQuestionsSelect(number)}
-                selected={props.selectedNumberOfQuestions === number}
-                correct={false}
-                answered={false}
-                style={{ marginRight: theme.space_sm }} // Adjust spacing between buttons
-              >
-                {number}
-              </Button>
-            ))}
+            <Flex justifyContent="center" marginBottom={theme.space_sm}>
+              {[5, 10, 15].map((number) => (
+                <Button
+                  key={number}
+                  onClick={() => handleNumberOfQuestionsSelect(number)}
+                  selected={props.selectedNumberOfQuestions === number}
+                  correct={false}
+                  answered={false}
+                  style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }} // Adjusted marginRight and added marginBottom
+                >
+                  {number}
+                </Button>
+              ))}
+            </Flex>
           </Card>
         </Flex>
         <Button onClick={props.onStartGame}>Start Game</Button>
@@ -187,7 +192,7 @@ export default function Placeholder(props: Props) {
         <h3>{question}</h3>
       </Card>
       <Card marginBottom={theme.space_md}>
-        <Flex justifyContent="center"> {/* Ensure buttons are horizontally centered */}
+        <Flex justifyContent="center">
           {allAnswers.map((answer, index) => (
             <Button
               key={index}
@@ -196,21 +201,24 @@ export default function Placeholder(props: Props) {
               correct={correctAnswer === answer}
               answered={correctAnswer !== null}
               disabled={answered} // Disable buttons once answered
-              style={{ marginRight: theme.space_sm }} // Adjust spacing between buttons
+              style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }} // Adjusted marginRight and added marginBottom
             >
               {answer}
             </Button>
           ))}
         </Flex>
       </Card>
-      <Card>
+      <Card style={{ display: "flex" }}>
+        {/* Display score and next question button */}
         {isCorrect !== null && (
           <p style={{ color: isCorrect ? theme.secondary : theme.error }}>
             {isCorrect ? "Correct!" : "Incorrect!"}
           </p>
         )}
         {correctAnswer && (
-          <Button onClick={handleNextQuestion}>Next Question</Button>
+          <Button onClick={handleNextQuestion} style={{ marginLeft: "auto" }}>
+            Next Question
+          </Button>
         )}
       </Card>
     </Flex>

@@ -1,4 +1,3 @@
-// button.tsx
 import styled from "@emotion/styled";
 
 type Props = {
@@ -25,6 +24,7 @@ const StyledButton = styled.button<{ selected: boolean; correct: boolean; answer
   border: "none",
   cursor: "pointer",
   transition: "background-color 0.3s, color 0.3s",
+  margin: `${theme.space_xs}`, // Add margin between buttons
 }));
 
 export default function Button({ children, onClick, selected, correct, answered }: Props) {
