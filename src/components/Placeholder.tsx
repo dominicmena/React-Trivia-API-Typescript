@@ -84,9 +84,9 @@ export default function Placeholder(props: Props) {
         width="100%"
       >
         <Flex
-          justifyContent="space-around"
-          marginBottom={theme.space_huge}
-          width="90%"
+          justifyContent="center"
+          marginTop={theme.space_huge}
+          width="30%"
         >
           <Card marginBottom={theme.space_lg}> {/* Increased marginBottom */}
             <h2>Instructions:</h2>
@@ -97,48 +97,51 @@ export default function Placeholder(props: Props) {
           </Card>
         </Flex>
         <Flex
-          justifyContent="space-around"
+          justifyContent="center"
           marginBottom={theme.space_huge}
           width="90%"
         >
-          {/* Category selection */}
-          <Card style={{ padding: theme.space_md, marginBottom: theme.space_lg }}> {/* Increased marginBottom */}
-            <h3>Select a Category:</h3>
-            <Flex justifyContent="center" marginBottom={theme.space_sm}>
-              {props.categories.slice(0, 3).map((category) => (
-                <Button
-                  key={category.id}
-                  onClick={() => handleCategorySelect(category.id.toString())}
-                  selected={props.selectedCategory === category.id.toString()}
-                  correct={false}
-                  answered={false}
-                  style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }} // Adjusted marginRight and added marginBottom
-                >
-                  {category.name}
-                </Button>
-              ))}
-            </Flex>
-          </Card>
-          {/* Number of questions selection */}
-          <Card style={{ padding: theme.space_md }}>
-            <h3>Select Number of Questions:</h3>
-            <Flex justifyContent="center" marginBottom={theme.space_sm}>
-              {[5, 10, 15].map((number) => (
-                <Button
-                  key={number}
-                  onClick={() => handleNumberOfQuestionsSelect(number)}
-                  selected={props.selectedNumberOfQuestions === number}
-                  correct={false}
-                  answered={false}
-                  style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }} // Adjusted marginRight and added marginBottom
-                >
-                  {number}
-                </Button>
-              ))}
-            </Flex>
-          </Card>
-        </Flex>
+          {/* Flex container for category and number of questions selection */}
+          <Flex direction="column" width="50%">
+            {/* Category selection */}
+            <Card style={{ padding: theme.space_md, marginBottom: theme.space_lg }}>
+              <h3>Select a Category:</h3>
+              <Flex justifyContent="center" marginBottom={theme.space_sm}>
+                {props.categories.slice(0, 3).map((category) => (
+                  <Button
+                    key={category.id}
+                    onClick={() => handleCategorySelect(category.id.toString())}
+                    selected={props.selectedCategory === category.id.toString()}
+                    correct={false}
+                    answered={false}
+                    style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }}
+                  >
+                    {category.name}
+                  </Button>
+                ))}
+              </Flex>
+            </Card>
+            {/* Number of questions selection */}
+            <Card style={{ padding: theme.space_md }}>
+              <h3>Select Number of Questions:</h3>
+              <Flex justifyContent="center" width="40%">
+                {[5, 10, 15].map((number) => (
+                  <Button
+                    key={number}
+                    onClick={() => handleNumberOfQuestionsSelect(number)}
+                    selected={props.selectedNumberOfQuestions === number}
+                    correct={false}
+                    answered={false}
+                    style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }}
+                  >
+                    {number}
+                  </Button>
+                ))}
+              </Flex>
+            </Card>
         <Button onClick={props.onStartGame}>Start Game</Button>
+          </Flex>
+        </Flex>
       </Flex>
     );
   }
