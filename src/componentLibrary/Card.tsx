@@ -8,7 +8,7 @@ const _Card = styled(Box)(({ theme }) => ({
   alignItems: "center",
   borderRadius: theme.borderRadius_3,
   backgroundColor: theme.cardBackground,
-  padding: theme.space_md, // Adjust padding as needed
+  padding: theme.space_sm, 
   boxShadow: `${theme.shadowDark}, ${theme.shadowLight}`,
 }));
 

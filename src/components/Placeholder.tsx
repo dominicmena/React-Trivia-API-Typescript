@@ -39,7 +39,8 @@ export default function Placeholder(props: Props) {
   }, [props.questions]);
 
   const handleAnswer = (selectedAnswer: string, correctAnswer: string) => {
-    if (!answered) { // Allow selection only if no answer has been chosen yet
+    if (!answered) {
+      // Allow selection only if no answer has been chosen yet
       if (selectedAnswer === correctAnswer) {
         setIsCorrect(true);
         setScore(score + 1);
@@ -83,16 +84,17 @@ export default function Placeholder(props: Props) {
         height="100%"
         width="100%"
       >
-        <Flex
-          justifyContent="center"
-          marginTop={theme.space_huge}
-          width="30%"
-        >
-          <Card marginBottom={theme.space_lg}> {/* Increased marginBottom */}
+        <Flex justifyContent="center" marginTop={theme.space_huge} width="45%">
+          <Card marginBottom={theme.space_lg}>
+            {" "}
+            {/* Increased marginBottom */}
             <h2>Instructions:</h2>
             <p>
-              Welcome to the Trivia Game! Click on the button below to start the
-              game.
+              Welcome to the Trivia Game! Test your knowledge by selecting any
+              of the categories below and the number of questions you want to
+              answer. For each correct answer, one point will be added to your
+              score. A wrong answer is zero points. Click on the "Start Game" button after your selections
+              to start the game.
             </p>
           </Card>
         </Flex>
@@ -104,7 +106,9 @@ export default function Placeholder(props: Props) {
           {/* Flex container for category and number of questions selection */}
           <Flex direction="column" width="50%">
             {/* Category selection */}
-            <Card style={{ padding: theme.space_md, marginBottom: theme.space_lg }}>
+            <Card
+              style={{ padding: theme.space_md, marginBottom: theme.space_lg }}
+            >
               <h3>Select a Category:</h3>
               <Flex justifyContent="center" marginBottom={theme.space_sm}>
                 {props.categories.slice(0, 3).map((category) => (
@@ -114,7 +118,10 @@ export default function Placeholder(props: Props) {
                     selected={props.selectedCategory === category.id.toString()}
                     correct={false}
                     answered={false}
-                    style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }}
+                    style={{
+                      marginRight: theme.space_sm,
+                      marginBottom: theme.space_sm,
+                    }}
                   >
                     {category.name}
                   </Button>
@@ -132,14 +139,17 @@ export default function Placeholder(props: Props) {
                     selected={props.selectedNumberOfQuestions === number}
                     correct={false}
                     answered={false}
-                    style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }}
+                    style={{
+                      marginRight: theme.space_sm,
+                      marginBottom: theme.space_sm,
+                    }}
                   >
                     {number}
                   </Button>
                 ))}
               </Flex>
             </Card>
-        <Button onClick={props.onStartGame}>Start Game</Button>
+            <Button onClick={props.onStartGame}>Start Game</Button>
           </Flex>
         </Flex>
       </Flex>
@@ -204,7 +214,10 @@ export default function Placeholder(props: Props) {
               correct={correctAnswer === answer}
               answered={correctAnswer !== null}
               disabled={answered} // Disable buttons once answered
-              style={{ marginRight: theme.space_sm, marginBottom: theme.space_sm }} // Adjusted marginRight and added marginBottom
+              style={{
+                marginRight: theme.space_sm,
+                marginBottom: theme.space_sm,
+              }} // Adjusted marginRight and added marginBottom
             >
               {answer}
             </Button>
