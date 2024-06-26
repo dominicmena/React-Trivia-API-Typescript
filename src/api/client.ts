@@ -15,17 +15,24 @@ export default class APIClient {
     return res.data.trivia_categories; // Adjust according to actual API response structure
   }
 
-  public async getQuestions(amount: string, category: string, difficulty: string, type: string) {
+  public async getQuestions(
+    amount: string,
+    category: string,
+    difficulty: string,
+    type: string
+  ) {
     try {
       const res = await unreliableAxios.get(
         `${this.baseURL}/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`
       );
       const questions = res.data.results as Question[];
-      return questions.map(question => ({
+      return questions.map((question) => ({
         ...question,
         question: decodeHtmlEntities(question.question),
         correct_answer: decodeHtmlEntities(question.correct_answer),
-        incorrect_answers: question.incorrect_answers.map(answer => decodeHtmlEntities(answer)),
+        incorrect_answers: question.incorrect_answers.map((answer) =>
+          decodeHtmlEntities(answer)
+        ),
       }));
     } catch (error) {
       throw new Error("Failed to fetch questions"); // Handle error or retry logic here if needed

@@ -11,12 +11,14 @@ type Props = {
   onSelectCategory: (category: string) => void;
   onSelectNumberOfQuestions: (number: number) => void;
   onStartGame: () => void;
-  onRestartGame: () => void;
+  onRestartGame: (score: number) => void;
   logCorrectAnswer: (questionIndex: number) => void;
   selectedNumberOfQuestions: number;
   selectedCategory: string | null;
   gameStarted: boolean;
+  
 };
+
 
 export default function Placeholder(props: Props) {
   const theme = useTheme();
@@ -93,8 +95,8 @@ export default function Placeholder(props: Props) {
               Welcome to the Trivia Game! Test your knowledge by selecting any
               of the categories below and the number of questions you want to
               answer. For each correct answer, one point will be added to your
-              score. A wrong answer is zero points. Click on the "Start Game" button after your selections
-              to start the game.
+              score. A wrong answer is zero points. Click on the "Start Game"
+              button after your selections to start the game.
             </p>
           </Card>
         </Flex>
@@ -170,7 +172,10 @@ export default function Placeholder(props: Props) {
           <p>
             Your final score is {score} out of {props.questions.length}.
           </p>
-          <Button onClick={props.onRestartGame}>Play Again</Button>
+          <Button onClick={() => {
+
+            console.log(score)
+            return props.onRestartGame(score)} }>Play Again</Button>
         </Card>
       </Flex>
     );
@@ -194,6 +199,9 @@ export default function Placeholder(props: Props) {
       height="100%"
       width="100%"
     >
+      
+      
+    
       <Card marginBottom={theme.space_md}>
         <h2>Trivia Game</h2>
         <p style={{ marginBottom: theme.space_xs }}>
@@ -237,6 +245,8 @@ export default function Placeholder(props: Props) {
           </Button>
         )}
       </Card>
+      
     </Flex>
+    
   );
 }
